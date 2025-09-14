@@ -1,0 +1,24 @@
+[2025-09-14T16:36:45.814+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2025-09-14T16:36:45.833+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: amazon_books_elt.get_amazon_books_data manual__2025-09-14T16:11:18.275150+00:00 [queued]>
+[2025-09-14T16:36:45.838+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: amazon_books_elt.get_amazon_books_data manual__2025-09-14T16:11:18.275150+00:00 [queued]>
+[2025-09-14T16:36:45.839+0000] {taskinstance.py:2306} INFO - Starting attempt 3 of 4
+[2025-09-14T16:36:45.855+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): get_amazon_books_data> on 2025-09-14 16:11:18.275150+00:00
+[2025-09-14T16:36:45.860+0000] {warnings.py:110} WARNING - /home/***/.local/lib/python3.12/site-packages/***/task/task_runner/standard_task_runner.py:61: DeprecationWarning: This process (pid=87) is multi-threaded, use of fork() may lead to deadlocks in the child.
+  pid = os.fork()
+
+[2025-09-14T16:36:45.863+0000] {standard_task_runner.py:63} INFO - Started process 89 to run task
+[2025-09-14T16:36:45.861+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'amazon_books_elt', 'get_amazon_books_data', 'manual__2025-09-14T16:11:18.275150+00:00', '--job-id', '11', '--raw', '--subdir', 'DAGS_FOLDER/amazon_books_elt.py', '--cfg-path', '/tmp/tmpm9rxfffi']
+[2025-09-14T16:36:45.864+0000] {standard_task_runner.py:91} INFO - Job 11: Subtask get_amazon_books_data
+[2025-09-14T16:36:45.907+0000] {task_command.py:426} INFO - Running <TaskInstance: amazon_books_elt.get_amazon_books_data manual__2025-09-14T16:11:18.275150+00:00 [running]> on host 4f15eb0ccf9d
+[2025-09-14T16:36:45.981+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='amazon_books_elt' AIRFLOW_CTX_TASK_ID='get_amazon_books_data' AIRFLOW_CTX_EXECUTION_DATE='2025-09-14T16:11:18.275150+00:00' AIRFLOW_CTX_TRY_NUMBER='3' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-09-14T16:11:18.275150+00:00'
+[2025-09-14T16:36:45.982+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2025-09-14T16:36:47.104+0000] {logging_mixin.py:188} INFO - Failed to retrieve page 1
+[2025-09-14T16:36:47.132+0000] {python.py:237} INFO - Done. Returned value was: None
+[2025-09-14T16:36:47.133+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2025-09-14T16:36:47.142+0000] {taskinstance.py:1206} INFO - Marking task as SUCCESS. dag_id=amazon_books_elt, task_id=get_amazon_books_data, run_id=manual__2025-09-14T16:11:18.275150+00:00, execution_date=20250914T161118, start_date=20250914T163645, end_date=20250914T163647
+[2025-09-14T16:36:47.200+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 0
+[2025-09-14T16:36:47.207+0000] {warnings.py:110} WARNING - /home/***/.local/lib/python3.12/site-packages/***/models/baseoperator.py:1296: AirflowProviderDeprecationWarning: Call to deprecated class PostgresOperator. (Please use `***.providers.common.sql.operators.sql.SQLExecuteQueryOperator`.Also, you can provide `hook_params={'schema': <database>}`.)
+  result = cls.__new__(cls)
+
+[2025-09-14T16:36:47.220+0000] {taskinstance.py:3498} INFO - 1 downstream tasks scheduled from follow-on schedule check
+[2025-09-14T16:36:47.221+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

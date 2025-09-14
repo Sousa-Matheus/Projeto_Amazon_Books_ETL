@@ -1,0 +1,42 @@
+[2025-09-14T17:14:07.407+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2025-09-14T17:14:07.422+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: amazon_books_elt.create_books_table manual__2025-09-14T16:11:18.275150+00:00 [queued]>
+[2025-09-14T17:14:07.427+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: amazon_books_elt.create_books_table manual__2025-09-14T16:11:18.275150+00:00 [queued]>
+[2025-09-14T17:14:07.427+0000] {taskinstance.py:2306} INFO - Starting attempt 3 of 4
+[2025-09-14T17:14:07.435+0000] {taskinstance.py:2330} INFO - Executing <Task(PostgresOperator): create_books_table> on 2025-09-14 16:11:18.275150+00:00
+[2025-09-14T17:14:07.440+0000] {warnings.py:110} WARNING - /home/***/.local/lib/python3.12/site-packages/***/task/task_runner/standard_task_runner.py:61: DeprecationWarning: This process (pid=120) is multi-threaded, use of fork() may lead to deadlocks in the child.
+  pid = os.fork()
+
+[2025-09-14T17:14:07.441+0000] {standard_task_runner.py:63} INFO - Started process 122 to run task
+[2025-09-14T17:14:07.441+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'amazon_books_elt', 'create_books_table', 'manual__2025-09-14T16:11:18.275150+00:00', '--job-id', '22', '--raw', '--subdir', 'DAGS_FOLDER/amazon_books_elt.py', '--cfg-path', '/tmp/tmpa3j27e8m']
+[2025-09-14T17:14:07.443+0000] {standard_task_runner.py:91} INFO - Job 22: Subtask create_books_table
+[2025-09-14T17:14:07.475+0000] {task_command.py:426} INFO - Running <TaskInstance: amazon_books_elt.create_books_table manual__2025-09-14T16:11:18.275150+00:00 [running]> on host 4f15eb0ccf9d
+[2025-09-14T17:14:07.527+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='amazon_books_elt' AIRFLOW_CTX_TASK_ID='create_books_table' AIRFLOW_CTX_EXECUTION_DATE='2025-09-14T16:11:18.275150+00:00' AIRFLOW_CTX_TRY_NUMBER='3' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-09-14T16:11:18.275150+00:00'
+[2025-09-14T17:14:07.528+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2025-09-14T17:14:07.537+0000] {sql.py:276} INFO - Executing: 
+    CREATE TABLE IF NOT EXISTS amazon_books (
+        id SERIAL PRIMARY KEY,
+        title TEXT NOT NULL,
+        author TEXT,
+        price TEXT,
+        rating TEXT
+    );
+    
+[2025-09-14T17:14:07.543+0000] {base.py:84} INFO - Using connection ID 'books_connection' for task execution.
+[2025-09-14T17:14:07.548+0000] {base.py:84} INFO - Using connection ID 'books_connection' for task execution.
+[2025-09-14T17:14:07.550+0000] {sql.py:470} INFO - Running statement: 
+    CREATE TABLE IF NOT EXISTS amazon_books (
+        id SERIAL PRIMARY KEY,
+        title TEXT NOT NULL,
+        author TEXT,
+        price TEXT,
+        rating TEXT
+    );
+    , parameters: None
+[2025-09-14T17:14:07.551+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2025-09-14T17:14:07.558+0000] {taskinstance.py:1206} INFO - Marking task as SUCCESS. dag_id=amazon_books_elt, task_id=create_books_table, run_id=manual__2025-09-14T16:11:18.275150+00:00, execution_date=20250914T161118, start_date=20250914T171407, end_date=20250914T171407
+[2025-09-14T17:14:07.574+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 0
+[2025-09-14T17:14:07.582+0000] {warnings.py:110} WARNING - /home/***/.local/lib/python3.12/site-packages/***/models/baseoperator.py:1296: AirflowProviderDeprecationWarning: Call to deprecated class PostgresOperator. (Please use `***.providers.common.sql.operators.sql.SQLExecuteQueryOperator`.Also, you can provide `hook_params={'schema': <database>}`.)
+  result = cls.__new__(cls)
+
+[2025-09-14T17:14:07.590+0000] {taskinstance.py:3498} INFO - 1 downstream tasks scheduled from follow-on schedule check
+[2025-09-14T17:14:07.592+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

@@ -1,0 +1,61 @@
+[2025-09-14T16:36:48.053+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2025-09-14T16:36:48.069+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: amazon_books_elt.create_books_table manual__2025-09-14T16:11:18.275150+00:00 [queued]>
+[2025-09-14T16:36:48.074+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: amazon_books_elt.create_books_table manual__2025-09-14T16:11:18.275150+00:00 [queued]>
+[2025-09-14T16:36:48.075+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 2
+[2025-09-14T16:36:48.084+0000] {taskinstance.py:2330} INFO - Executing <Task(PostgresOperator): create_books_table> on 2025-09-14 16:11:18.275150+00:00
+[2025-09-14T16:36:48.088+0000] {warnings.py:110} WARNING - /home/***/.local/lib/python3.12/site-packages/***/task/task_runner/standard_task_runner.py:61: DeprecationWarning: This process (pid=90) is multi-threaded, use of fork() may lead to deadlocks in the child.
+  pid = os.fork()
+
+[2025-09-14T16:36:48.089+0000] {standard_task_runner.py:63} INFO - Started process 92 to run task
+[2025-09-14T16:36:48.090+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'amazon_books_elt', 'create_books_table', 'manual__2025-09-14T16:11:18.275150+00:00', '--job-id', '12', '--raw', '--subdir', 'DAGS_FOLDER/amazon_books_elt.py', '--cfg-path', '/tmp/tmpcdvjft12']
+[2025-09-14T16:36:48.091+0000] {standard_task_runner.py:91} INFO - Job 12: Subtask create_books_table
+[2025-09-14T16:36:48.122+0000] {task_command.py:426} INFO - Running <TaskInstance: amazon_books_elt.create_books_table manual__2025-09-14T16:11:18.275150+00:00 [running]> on host 4f15eb0ccf9d
+[2025-09-14T16:36:48.189+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='amazon_books_elt' AIRFLOW_CTX_TASK_ID='create_books_table' AIRFLOW_CTX_EXECUTION_DATE='2025-09-14T16:11:18.275150+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-09-14T16:11:18.275150+00:00'
+[2025-09-14T16:36:48.190+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2025-09-14T16:36:48.202+0000] {sql.py:276} INFO - Executing: 
+    CREATE TABLE IF NOT EXISTS amazon_books (
+        id SERIAL PRIMARY KEY,
+        title TEXT NOT NULL,
+        author TEXT,
+        price TEXT,
+        rating TEXT
+    );
+    
+[2025-09-14T16:36:48.210+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2025-09-14T16:36:48.220+0000] {taskinstance.py:2905} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 465, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 432, in _execute_callable
+    return execute_callable(context=context, **execute_callable_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 400, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/providers/common/sql/operators/sql.py", line 277, in execute
+    hook = self.get_db_hook()
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/providers/common/sql/operators/sql.py", line 188, in get_db_hook
+    return self._hook
+           ^^^^^^^^^^
+  File "/usr/local/lib/python3.12/functools.py", line 995, in __get__
+    val = self.func(instance)
+          ^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/providers/common/sql/operators/sql.py", line 150, in _hook
+    conn = BaseHook.get_connection(conn_id)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/hooks/base.py", line 83, in get_connection
+    conn = Connection.get_connection_from_secrets(conn_id)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/connection.py", line 519, in get_connection_from_secrets
+    raise AirflowNotFoundException(f"The conn_id `{conn_id}` isn't defined")
+airflow.exceptions.AirflowNotFoundException: The conn_id `book_connection` isn't defined
+[2025-09-14T16:36:48.225+0000] {taskinstance.py:1206} INFO - Marking task as UP_FOR_RETRY. dag_id=amazon_books_elt, task_id=create_books_table, run_id=manual__2025-09-14T16:11:18.275150+00:00, execution_date=20250914T161118, start_date=20250914T163648, end_date=20250914T163648
+[2025-09-14T16:36:48.237+0000] {standard_task_runner.py:110} ERROR - Failed to execute job 12 for task create_books_table (The conn_id `book_connection` isn't defined; 92)
+[2025-09-14T16:36:48.263+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 1
+[2025-09-14T16:36:48.272+0000] {warnings.py:110} WARNING - /home/***/.local/lib/python3.12/site-packages/***/models/baseoperator.py:1296: AirflowProviderDeprecationWarning: Call to deprecated class PostgresOperator. (Please use `***.providers.common.sql.operators.sql.SQLExecuteQueryOperator`.Also, you can provide `hook_params={'schema': <database>}`.)
+  result = cls.__new__(cls)
+
+[2025-09-14T16:36:48.284+0000] {taskinstance.py:3498} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-09-14T16:36:48.285+0000] {local_task_job_runner.py:222} INFO - ::endgroup::
