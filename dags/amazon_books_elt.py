@@ -1,3 +1,4 @@
+# importando bibliotecas
 from airflow import DAG
 from airflow.operators.python import PythonOperator
 from airflow.providers.postgres.operators.postgres import PostgresOperator
@@ -7,6 +8,7 @@ from datetime import datetime, timedelta
 import pandas as pd
 from bs4 import BeautifulSoup
 
+# definindo os readers para o uso no requests
 headers = {
     "Referer": "https://www.amazon.com/",
     "Sec-Ch-Ua": "Not_A Brand",
@@ -17,6 +19,8 @@ headers = {
                    "Chrome/118.0.5993.70 Safari/537.36")
 }
 
+# Criando função para trazer dados do site no formato html com requests e utilizando beautifulsoup para organizar e consultar
+# e consultar de acordo com a classe, e fazer alguns tratamentos simples com pandas
 def get_amazon_books_data(num_books, ti):
     
     base_url = f"https://www.amazon.com/data-engineering/s?k=data+engineering"
@@ -70,6 +74,7 @@ def get_amazon_books_data(num_books, ti):
 
     ti.xcom_push(key="books_data", value=df.to_dict(orient="records"))
 
+# Função para inserir o dados no postgress
 def load_books_data(ti):
     book_data = ti.xcom_pull(key="books_data", task_ids="get_amazon_books_data")
     if not book_data:
@@ -84,6 +89,7 @@ def load_books_data(ti):
     for book in book_data:
         postgreshook.run(insert_query, parameters=(book["title"], book["author"], book["price"], book["rating"]))
 
+# Criando as dags e as tasks
 default_args = {
     "owner": "airflow",
     "depends_on_past": False,
